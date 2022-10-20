@@ -1,17 +1,25 @@
 <template>
   <div>
-    <my-product
-      v-for="obj in list"
-      :key="obj.id"
-      :title="obj.proname"
-      :price="obj.proprice"
-      :desc="obj.info"
-    ></my-product>
+    <div style="float: left">
+      <my-product
+        v-for="(obj, index) in list"
+        :key="obj.id"
+        :title="obj.proname"
+        :price="obj.proprice"
+        :desc="obj.info"
+        :index="index"
+        @subprice="fn"
+      ></my-product>
+    </div>
+    <div style="float: left">
+      <List :arr="list"></List>
+    </div>
   </div>
 </template>
 
 <script>
 import MyProduct from './components/MyProduct'
+import List from './components/List'
 export default {
   name: 'App',
   data() {
@@ -38,8 +46,18 @@ export default {
       ],
     }
   },
+  methods: {
+    fn(index, price) {
+      if (this.list[index].proprice < price) {
+        alert('砍不了了，老板买了吧')
+        return
+      }
+      this.list[index].proprice -= price
+    },
+  },
   components: {
     MyProduct,
+    List,
   },
 }
 </script>
