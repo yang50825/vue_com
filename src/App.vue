@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <my-product
+      v-for="obj in list"
+      :key="obj.id"
+      :title="obj.proname"
+      :price="obj.proprice"
+      :desc="obj.info"
+    ></my-product>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MyProduct from './components/MyProduct'
 export default {
   name: 'App',
+  data() {
+    return {
+      list: [
+        {
+          id: 1,
+          proname: '超级好吃的棒棒糖',
+          proprice: 18.8,
+          info: '开业大酬宾, 全场8折',
+        },
+        {
+          id: 2,
+          proname: '超级好吃的大鸡腿',
+          proprice: 34.2,
+          info: '好吃不腻, 快来买啊',
+        },
+        {
+          id: 3,
+          proname: '超级无敌的冰激凌',
+          proprice: 14.2,
+          info: '炎热的夏天, 来个冰激凌了',
+        },
+      ],
+    }
+  },
   components: {
-    HelloWorld
-  }
+    MyProduct,
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
